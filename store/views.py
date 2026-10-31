@@ -4,7 +4,7 @@ from .models import Product, Category
 
 
 def home(request):
-    products = Product.objects.filter(available=True)
+    products = Product.objects.filter(is_active=True)
     categories = Category.objects.all()
 
     context = {
@@ -13,4 +13,3 @@ def home(request):
     }
 
     return render(request, "store/home.html", context)
-
