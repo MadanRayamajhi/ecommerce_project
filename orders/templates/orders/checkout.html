@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout - Nepali Shop{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Checkout</h2>
+
+<div class="row g-4">
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Shipping Information</h5>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="full_name" class="form-label">
+                            Full Name
+                        </label>
+                        <input
+                            type="text"
+                            id="full_name"
+                            name="full_name"
+                            class="form-control"
+                            maxlength="150"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">
+                            Delivery Address
+                        </label>
+                        <textarea
+                            id="address"
+                            name="address"
+                            class="form-control"
+                            rows="3"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">
+                            Phone Number
+                        </label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            class="form-control"
+                            pattern="[0-9+\-\s]{7,20}"
+                            title="Enter a valid phone number"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn btn-success">
+                        Place Order
+                    </button>
+
+                    <a href="{% url 'cart_detail' %}"
+                       class="btn btn-outline-secondary ms-2">
+                        Back to Cart
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Order Summary</h5>
+
+                <p>
+                    Total Items:
+                    {{ cart.total_items }}
+                </p>
+
+                <hr>
+
+                <h4 class="text-success">
+                    Total: Rs. {{ cart.total_price }}
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
